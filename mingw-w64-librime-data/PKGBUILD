@@ -1,0 +1,20 @@
+# Maintainer: Feng Shu <tumashu@163.com>
+
+_realname=librime-data
+pkgbase=mingw-w64-${_realname}
+pkgname="${MINGW_PACKAGE_PREFIX}-${_realname}"
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Rime input schema from plum (mingw-w64)"
+url="https://github.com/rime/plum"
+arch=('any')
+license=('LGPL3')
+makedepends=("git")
+source=("plum-git::git+https://github.com/rime/plum.git")
+sha256sums=('SKIP')
+
+package() {
+  cd ${srcdir}
+  export rime_dir="${pkgdir}${MINGW_PREFIX}/share/rime-data"
+  bash ${srcdir}/plum-git/rime-install :all
+}
